@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="10dp"
+            android:background="#B0C4DE"/>
+        <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#B0C4DE">
+            <ImageButton
+                android:id="@+id/action_bar_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="#B0C4DE"
+                android:src="@drawable/back" />
+            <TextView
+                android:id="@+id/action_bar_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginLeft="10dp"
+                android:textSize="18sp"
+                android:maxLines="2"
+                android:ellipsize="end"
+                android:text="请假申请"
+                android:layout_toRightOf="@id/action_bar_btn"
+                android:layout_centerVertical="true"
+                />
+            <ImageButton
+                android:id="@+id/leave_add_apply"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/add"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="20dp"
+                />
+        </RelativeLayout>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="10dp"
+            android:background="#B0C4DE"/>
+    </LinearLayout>
+    <TextView
+        android:layout_height="match_parent"
+        android:layout_width="match_parent"
+        android:textSize="30sp"
+        android:gravity="center"
+        android:text="您当前还没有任何\n请假申请..."
+        />
+</LinearLayout>

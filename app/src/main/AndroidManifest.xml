@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.chen.activity">
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <activity android:name="com.chen.activity.MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name="com.chen.activity.NoticeContentActivity">
+            <intent-filter>
+                <action android:name="com.chen.MainActivity.ACTION_CHECK_NOTICE" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity android:name="com.chen.activity.AboutActivity">
+            <intent-filter>
+                <action android:name="com.chen.MainActivity.ACTION_ABOUT" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity android:name="com.chen.activity.SubmitGradeContentActivity">
+            <intent-filter>
+                <action android:name="com.chen.MainActivity.ACTION_SUBMIT_GRADE" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity android:name="com.chen.activity.SubmitGradeActivity">
+            <intent-filter>
+                <action android:name="com.chen.MainActivity.ACTION_GRADE" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity android:name="com.chen.activity.UserMsgActivity">
+            <intent-filter>
+                <action android:name="com.chen.MainActivity.ACTION_USER_MSG" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity android:name="com.chen.activity.ClassMsgActivity">
+            <intent-filter>
+                <action android:name="com.chen.MainActivity.ACTION_CLASS_MSG" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity android:name="com.chen.activity.ClassMembersActivity">
+            <intent-filter>
+                <action android:name="com.chen.MainActivity.ACTION_CLASS_MEMBERS" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity android:name="com.chen.activity.LeaveApplicationActivity">
+            <intent-filter>
+                <action android:name="com.chen.MainActivity.ACTION_CLASS_LEAVE_APPLICATION" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity android:name="com.chen.activity.LeaveApplyContentActivity">
+            <intent-filter>
+                <action android:name="com.chen.MainActivity.ACTION_CLASS_LEAVE_APPLICATION_CONTENT" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity android:name="com.chen.activity.LeaveApplyAddActivity">
+            <intent-filter>
+                <action android:name="com.chen.MainActivity.ACTION_CLASS_ADD_LEAVE_APPLICATION" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+    </application>
+
+</manifest>
