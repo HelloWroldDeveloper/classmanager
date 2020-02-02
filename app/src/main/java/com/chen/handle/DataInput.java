@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 
 import com.chen.data.LeaveApplication;
+import com.chen.data.User;
 
 //数据输入类
 //用于从本地或网络获取数据
@@ -16,12 +17,10 @@ public class DataInput {
         //获取版本号(在此书写逻辑)
         return version;
     }
+
+    //获得班级编号
     public static String getClassNumber(){
-        String number="";
-        //获取班号(在此书写逻辑)
-        number="2019040000";
-        //获取班号(在此书写逻辑)
-        return number;
+        return User.getNowUser().getNumber().substring(0,10);
     }
 
     //从本地获取用户创建的请假申请

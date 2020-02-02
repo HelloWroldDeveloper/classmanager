@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+import com.chen.data.ClassSign;
 import com.chen.data.Grade;
 import com.chen.data.LeaveApplication;
 import com.chen.data.Notice;
@@ -81,6 +82,7 @@ public class MainActivity extends BaseActivity {
         User.initUsers();//初始化班级用户
         LeaveApplication.initApplications();//初始化请假申请
         AppInterface.AppInit();
+        ClassSign.initSign();
         //初始化主活动
         //初始化主活动
     }

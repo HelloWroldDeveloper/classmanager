@@ -37,6 +37,11 @@ public class AppInterface {
         return User.getLatestUsers();
     }
 
+    public static MyDate parseMyDate(String date){
+        //将字符串解析为日期对象
+        //格式为 yyyy年mm月dd日  HH:MM
+        return MyDate.parseMyDate(date);
+    }
     public static MyDate getCurrentDate(){
         //获取当前时间
         return MyDate.getCurrentDate();

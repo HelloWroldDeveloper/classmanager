@@ -38,6 +38,10 @@ public class User {
     public void setNow_user(){
         this.isNowUser=true;
     }
+    public void setNumber(String number) {
+        this.number = number;
+    }
+
     public static void initUsers(){
         //初始化班级用户列表(在此书写逻辑)
         User monitor=new User("000000","monitor",true);
@@ -49,6 +53,7 @@ public class User {
             }
             User user=new User(number,i+""+i,false);
             if(i==1){
+                user.setNumber("2019040705010");
                 now_user=user;
                 user.setNow_user();
             }

@@ -53,6 +53,28 @@ public class MyDate {
         date.append(minute);
         return date.toString();
     }
+    //由字符串解析为日期对象
+    public static MyDate parseMyDate(String date){
+        int y=-1;
+        int[] mdhm=new int[4];
+        String[] temp=new String[4];
+        y=Integer.parseInt(date.substring(0,4));
+        temp[0]=date.substring(5,7);
+        temp[1]=date.substring(8,10);
+        temp[2]=date.substring(13,15);
+        temp[3]=date.substring(16);
+        for(int i=0;i<4;i++){
+            String s=temp[i];
+            char[] c=s.toCharArray();
+            mdhm[i]=(c[0]-48)*10+c[1];
+        }
+        if(y==-1||mdhm[0]==-1||mdhm[1]==-1||mdhm[2]==-1||mdhm[3]==-1){
+            return null;
+        }else{
+            return new MyDate(y,mdhm[0],mdhm[1],mdhm[2],mdhm[3]);
+        }
+    }
+
     //判断当前时间是否比所提供的时间早(包括刚好相等)
     public boolean before(MyDate date) throws ParseException {
         Date from = new SimpleDateFormat("yyyy年MM月dd日  HH:mm").parse(date.toString());
@@ -64,7 +86,6 @@ public class MyDate {
             return (from.getTime()-to.getTime())>0;
         }
     }
-
     //获取当前时间
     public static MyDate getCurrentDate(){
         Calendar calendars = Calendar.getInstance();

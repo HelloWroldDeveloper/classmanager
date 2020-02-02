@@ -1,5 +1,6 @@
 package com.chen.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,6 +13,8 @@ import androidx.fragment.app.Fragment;
 
 import com.chen.activity.ClassMsgActivity;
 import com.chen.activity.R;
+import com.yang.activity.Main2Activity;
+
 //"首页"碎片
 public class FirstPage_fragment extends Fragment {
     private LinearLayout class_msg;//"班级信息"布局框
@@ -42,7 +45,8 @@ public class FirstPage_fragment extends Fragment {
             @Override
             public void onClick(View view) {
                 //在此书写"投票"布局框的点击事件处理
-
+                Intent intent= new Intent(getActivity(), Main2Activity.class);
+                startActivity(intent);
                 //在此书写"投票"布局框的点击事件处理
             }
         });

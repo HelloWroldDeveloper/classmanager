@@ -13,6 +13,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.chen.activity.AboutActivity;
+import com.chen.activity.ClassSignActivity;
 import com.chen.activity.LeaveApplicationActivity;
 import com.chen.activity.R;
 import com.chen.activity.SubmitGradeActivity;
@@ -71,7 +72,7 @@ public class Me_fragment extends Fragment {
             @Override
             public void onClick(View view) {
                 //在此书写"签到"标签的点击事件处理
-
+                ClassSignActivity.actionStart(getActivity());
                 //在此书写"签到"标签的点击事件处理
             }
         });
