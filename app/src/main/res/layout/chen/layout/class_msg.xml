@@ -43,6 +43,7 @@
             android:layout_height="wrap_content"
             android:textSize="25sp"
             android:id="@+id/class_msg_people_num"
+            android:text="获取中"
             />
         <TextView
             android:layout_width="wrap_content"
@@ -55,7 +56,7 @@
             android:layout_width="100dp"
             android:textSize="25sp"
             android:layout_marginLeft="20dp"
-            android:text="查看"
+            android:text="请稍等"
             android:id="@+id/class_msg_btn"
             android:background="@drawable/btn"
             style="?android:attr/borderlessButtonStyle"

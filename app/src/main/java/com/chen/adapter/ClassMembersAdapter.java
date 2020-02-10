@@ -1,6 +1,5 @@
 package com.chen.adapter;
 
-import android.app.Activity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,39 +17,37 @@ import java.util.List;
 //班级成员列表的适配器
 public class ClassMembersAdapter extends RecyclerView.Adapter<ClassMembersAdapter.ViewHolderParent>{
     private List<MemberStyle> styles;//项目列表
-    private Activity activity;
 
-    public ClassMembersAdapter(List<MemberStyle> styles,Activity activity){
+    public ClassMembersAdapter(List<MemberStyle> styles){
         this.styles=styles;
-        this.activity=activity;
     }
     //子项基类 内部类
     static class ViewHolderParent extends RecyclerView.ViewHolder{
         TextView member_number;
         TextView member_name;
         TextView tip;
-        public ViewHolderParent(View view){
+        ViewHolderParent(View view){
             super(view);
         }
     }
     //"用户"子项 内部类
     static class ViewHolderUser extends ViewHolderParent{
-        public ViewHolderUser(View view){
+        ViewHolderUser(View view){
             super(view);
-            this.member_name=(TextView)view.findViewById(R.id.class_member_name);
-            this.member_number=(TextView)view.findViewById(R.id.class_member_number);
+            this.member_name=view.findViewById(R.id.class_member_name);
+            this.member_number=view.findViewById(R.id.class_member_number);
         }
     }
     //"提示"子项 内部类
     static class ViewHolderTip extends ViewHolderParent{
-        public ViewHolderTip(View view){
+        ViewHolderTip(View view){
             super(view);
-            this.tip=(TextView)view.findViewById(R.id.class_member_tip);
+            this.tip=view.findViewById(R.id.class_member_tip);
         }
     }
     //"空白"子项 内部类
     static class ViewHolderWhite extends ViewHolderParent{
-        public ViewHolderWhite(View view){
+        ViewHolderWhite(View view){
             super(view);
         }
     }
@@ -92,7 +89,7 @@ public class ClassMembersAdapter extends RecyclerView.Adapter<ClassMembersAdapte
         return styles.get(position).getType();
     }
 
-    public void setStyles(List<MemberStyle> styles) {
+    /*public void setStyles(List<MemberStyle> styles) {
         this.styles = styles;
-    }
+    }*/
 }

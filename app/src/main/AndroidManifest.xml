@@ -11,6 +11,7 @@
     <uses-permission android:name="android.permission.INTERNET"/>
 
     <application
+        android:name="com.chen.handle.MyApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -24,11 +25,6 @@
 
         <service android:name="com.baidu.location.f" android:enabled="true" android:process=":remote">
         </service>
-
-        <activity android:name="com.yang.activity.VoteResultActivity"/>
-        <activity android:name="com.yang.activity.VoteActivity" />
-        <activity android:name="com.yang.activity.VoteContentActivity" />
-        <activity android:name="com.yang.activity.Main2Activity" />
 
         <activity android:name="com.chen.activity.MainActivity">
             <intent-filter>
@@ -110,6 +106,41 @@
         <activity android:name="com.chen.activity.ClassSignActivity">
             <intent-filter>
                 <action android:name="com.chen.MainActivity.ACTION_CLASS_SIGN" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity android:name="com.chen.activity.VoteListActivity">
+            <intent-filter>
+                <action android:name="com.chen.MainActivity.ACTION_VOTE_LIST" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity android:name="com.chen.activity.VoteAddActivity">
+            <intent-filter>
+                <action android:name="com.chen.MainActivity.ACTION_VOTE_ADD" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity android:name="com.chen.activity.VoteAddActivity2">
+            <intent-filter>
+                <action android:name="com.chen.MainActivity.ACTION_VOTE_ADD2" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity android:name="com.chen.activity.VoteContentActivity">
+            <intent-filter>
+                <action android:name="com.chen.MainActivity.ACTION_VOTE_CONTENT" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity android:name="com.chen.activity.RegisterActivity">
+            <intent-filter>
+                <action android:name="com.chen.MainActivity.ACTION_REGISTER" />
 
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>

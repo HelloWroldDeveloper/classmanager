@@ -9,18 +9,16 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
 
 import com.chen.data.LeaveApplication;
 import com.chen.data.MyDate;
 import com.chen.fragment.Leave_apply_add_s1_fragment;
 import com.chen.fragment.Leave_apply_add_s3_fragment;
-import com.chen.handle.DataOutput;
+import com.chen.handle.Util;
 
 import java.text.ParseException;
 
+//添加请假申请 activity
 public class LeaveApplyAddActivity extends BaseActivity{
     private static final String TAG="ADD_APPLY";
 
@@ -40,7 +38,8 @@ public class LeaveApplyAddActivity extends BaseActivity{
         next=findViewById(R.id.leave_apply_add_next);
         s1_fragment=new Leave_apply_add_s1_fragment();
         back.setEnabled(false);
-        replaceFragment(s1_fragment);
+        Util.hideDefaultActionbar(this);//隐藏系统默认的标题栏
+        Util.replaceFragment(LeaveApplyAddActivity.this,R.id.leave_apply_add_fragment,s1_fragment);
         addEvent();
     }
 
@@ -61,7 +60,7 @@ public class LeaveApplyAddActivity extends BaseActivity{
                     next.setEnabled(true);
                     next.setText("下一步");
                     s1_fragment=new Leave_apply_add_s1_fragment();
-                    replaceFragment(s1_fragment);
+                    Util.replaceFragment(LeaveApplyAddActivity.this,R.id.leave_apply_add_fragment,s1_fragment);
                     now_step=1;
                 }
             }
@@ -85,7 +84,7 @@ public class LeaveApplyAddActivity extends BaseActivity{
                     back.setEnabled(true);
                     next.setText("完成");
                     s3_fragment=new Leave_apply_add_s3_fragment();
-                    replaceFragment(s3_fragment);
+                    Util.replaceFragment(LeaveApplyAddActivity.this,R.id.leave_apply_add_fragment,s3_fragment);
                     now_step=3;
                 }else if(now_step==3){
                     //检查用户是否正确填写
@@ -126,28 +125,13 @@ public class LeaveApplyAddActivity extends BaseActivity{
                         }
                     }catch (ParseException e){
                         Log.e(TAG, "无法解析日期" );
-                        Toast.makeText(LeaveApplyAddActivity.this,"无法解析日期",Toast.LENGTH_SHORT);
+                        Toast.makeText(LeaveApplyAddActivity.this,"无法解析日期",Toast.LENGTH_SHORT).show();
                         LeaveApplyAddActivity.this.finish();
                     }
-                    //检查用户是否正确填写
-                    LeaveApplication application=new LeaveApplication(s1_fragment.getTitle(),s1_fragment.getContent()
-                    ,start,end);
-                    LeaveApplication.addNewApplication(application);
-                    Toast.makeText(LeaveApplyAddActivity.this,"成功创建申请",Toast.LENGTH_SHORT).show();
-                    s3_fragment.setCreating(true);
-                    DataOutput.deleteApplication(LeaveApplyAddActivity.this);
-                    LeaveApplyAddActivity.this.finish();
+                    LeaveApplication.addNewApplication(s1_fragment.getTitle(),s1_fragment.getContent(),start,end,s3_fragment,LeaveApplyAddActivity.this);
                 }
             }
         });
-    }
-
-    private void replaceFragment(Fragment fragment){
-        //把某个碎片添加到屏幕上
-        FragmentManager manager=getSupportFragmentManager();
-        FragmentTransaction transaction=manager.beginTransaction();
-        transaction.replace(R.id.leave_apply_add_fragment,fragment);
-        transaction.commit();
     }
     public static void actionStart(Context context){
         //执行该方法以启动当前活动

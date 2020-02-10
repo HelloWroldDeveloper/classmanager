@@ -22,6 +22,7 @@ import com.chen.data.MyDate;
 import com.chen.handle.DataInput;
 import com.chen.handle.DataOutput;
 
+//创建请假申请步骤三 fragment
 public class Leave_apply_add_s3_fragment extends Fragment{
     private boolean creating=false;
 
@@ -56,10 +57,10 @@ public class Leave_apply_add_s3_fragment extends Fragment{
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view=inflater.inflate(R.layout.leave_apply_add_s3,container,false);
-        start_date_text=(TextView)view.findViewById(R.id.leave_apply_add_s3_start_date_text);
-        end_date_text=(TextView)view.findViewById(R.id.leave_apply_add_s3_end_date_text);
-        start_time_text=(TextView)view.findViewById(R.id.leave_apply_add_s3_start_time_text);
-        end_time_text=(TextView)view.findViewById(R.id.leave_apply_add_s3_end_time_text);
+        start_date_text=view.findViewById(R.id.leave_apply_add_s3_start_date_text);
+        end_date_text=view.findViewById(R.id.leave_apply_add_s3_end_date_text);
+        start_time_text=view.findViewById(R.id.leave_apply_add_s3_start_time_text);
+        end_time_text=view.findViewById(R.id.leave_apply_add_s3_end_time_text);
         input();
         addEvent();
         return view;
@@ -138,7 +139,7 @@ public class Leave_apply_add_s3_fragment extends Fragment{
         }
     }
     //对用户输入的时间进行格式化
-    private String format_time(String input){
+    /*private String format_time(String input){
         int r=0,k=1;
         char[] chars=input.toCharArray();
         for(int i=chars.length-1;i>=0;i--){
@@ -146,7 +147,7 @@ public class Leave_apply_add_s3_fragment extends Fragment{
             k*=10;
         }
         return r+"";
-    }
+    }*/
     //对由日期选择器获取的日期进行格式化
     private String format_date(int input){
         return ""+(input<10 ? ("0"+input):input);

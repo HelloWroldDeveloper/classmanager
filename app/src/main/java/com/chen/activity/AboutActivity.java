@@ -9,14 +9,12 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.appcompat.app.ActionBar;
-
 import com.chen.handle.DataInput;
+import com.chen.handle.DataOutput;
+import com.chen.handle.Util;
 
 //"关于"板块的activity
 public class AboutActivity extends BaseActivity {
-    private TextView title;//标题栏的标签
-    private TextView version;//显示版本的标签
     private Button update_btn;//"检查更新"按钮
     private Button advise_btn;//"提交反馈"按钮
     private EditText advise_text;//用户书写反馈的文本框
@@ -24,15 +22,12 @@ public class AboutActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.about);
-        ActionBar bar=getSupportActionBar();
-        if(bar!=null){
-            bar.hide();//隐藏系统默认的标题栏
-        }
-        title=(TextView)findViewById(R.id.action_bar_text);
-        version=(TextView)findViewById(R.id.version_text);
-        update_btn=(Button)findViewById(R.id.update);
-        advise_btn=(Button)findViewById(R.id.advise_btn);
-        advise_text=(EditText)findViewById(R.id.advise_text);
+        Util.hideDefaultActionbar(this);//隐藏系统默认的标题栏
+        TextView title=findViewById(R.id.action_bar_text);
+        TextView version=findViewById(R.id.version_text);
+        update_btn=findViewById(R.id.update);
+        advise_btn=findViewById(R.id.advise_btn);
+        advise_text=findViewById(R.id.advise_text);
         version.setText(DataInput.getNowVersion());
         title.setText("关于");
         addEvent();
@@ -42,8 +37,7 @@ public class AboutActivity extends BaseActivity {
             @Override
             public void onClick(View view) {
                 //在此书写"检查更新"的逻辑
-
-                //在此书写"检查更新"的逻辑
+                DataInput.checkUpdate(AboutActivity.this);
             }
         });
         advise_btn.setOnClickListener(new View.OnClickListener() {
@@ -51,11 +45,10 @@ public class AboutActivity extends BaseActivity {
             public void onClick(View view) {
                 String advice=advise_text.getText().toString();//获取用户的反馈
                 if(advice.equals("")){
-                    Toast.makeText(AboutActivity.this,"你还没有填写反馈信息",Toast.LENGTH_SHORT);
+                    Toast.makeText(AboutActivity.this,"你还没有填写反馈信息",Toast.LENGTH_SHORT).show();
                 }else {
-                    //在此书写"提交反馈"的逻辑
-
-                    //在此书写"提交反馈"的逻辑
+                    //提交反馈
+                    DataOutput.sendFeedback(advice,AboutActivity.this,advise_text);
                 }
             }
         });

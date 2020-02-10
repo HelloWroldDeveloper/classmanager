@@ -27,12 +27,15 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
                 android:layout_alignParentLeft="true"
-                android:id="@+id/class_msg">
-                <ImageView
+                >
+                <Button
                     android:layout_height="wrap_content"
                     android:layout_width="wrap_content"
+                    android:textSize="25sp"
                     android:layout_marginLeft="20dp"
                     android:background="@drawable/class_msg"
+                    style="?android:attr/borderlessButtonStyle"
+                    android:id="@+id/class_msg"
                     />
                 <TextView
                     android:text="班级信息"
@@ -50,12 +53,15 @@
                 android:orientation="vertical"
                 android:layout_alignParentRight="true"
                 android:layout_marginRight="20dp"
-                android:id="@+id/vote">
-                <ImageView
+                >
+                <Button
                     android:layout_height="wrap_content"
                     android:layout_width="wrap_content"
+                    android:textSize="25sp"
                     android:layout_marginLeft="20dp"
                     android:background="@drawable/vote"
+                    style="?android:attr/borderlessButtonStyle"
+                    android:id="@+id/vote"
                     />
                 <TextView
                     android:text="投票"
@@ -82,38 +88,17 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
                 android:layout_alignParentLeft="true"
-                android:id="@+id/disk">
-                <ImageView
+                >
+                <Button
                     android:layout_height="wrap_content"
                     android:layout_width="wrap_content"
+                    android:textSize="25sp"
                     android:layout_marginLeft="20dp"
-                    android:background="@drawable/disk"
+                    android:background="@drawable/more"
+                    style="?android:attr/borderlessButtonStyle"
                     />
                 <TextView
-                    android:text="网盘"
-                    android:layout_height="wrap_content"
-                    android:layout_width="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginTop="10dp"
-                    android:layout_gravity="center"
-                    android:textSize="20sp"
-                    />
-            </LinearLayout>
-            <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:layout_alignParentRight="true"
-                android:layout_marginRight="20dp"
-                android:id="@+id/wechat">
-                <ImageView
-                    android:layout_height="wrap_content"
-                    android:layout_width="wrap_content"
-                    android:layout_marginLeft="20dp"
-                    android:background="@drawable/wechat"
-                    />
-                <TextView
-                    android:text="公众号"
+                    android:text="敬请期待"
                     android:layout_height="wrap_content"
                     android:layout_width="wrap_content"
                     android:layout_marginLeft="10dp"

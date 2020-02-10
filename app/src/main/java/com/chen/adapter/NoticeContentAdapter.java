@@ -18,8 +18,8 @@ public class NoticeContentAdapter extends RecyclerView.Adapter<NoticeContentAdap
         TextView notice_msg;
         public ViewHolder(View view){
             super(view);
-            notice_content=(TextView)view.findViewById(R.id.notice_content_text);
-            notice_msg=(TextView)view.findViewById(R.id.notice_content_msg);
+            notice_content=view.findViewById(R.id.notice_content_text);
+            notice_msg=view.findViewById(R.id.notice_content_msg);
         }
     }
     public NoticeContentAdapter(String content,String extra_msg){
@@ -30,8 +30,7 @@ public class NoticeContentAdapter extends RecyclerView.Adapter<NoticeContentAdap
     @Override
     public NoticeContentAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view= LayoutInflater.from(parent.getContext()).inflate(R.layout.notice_content,parent,false);
-        NoticeContentAdapter.ViewHolder holder=new NoticeContentAdapter.ViewHolder(view);
-        return holder;
+        return new NoticeContentAdapter.ViewHolder(view);
     }
     @Override
     public void onBindViewHolder(@NonNull NoticeContentAdapter.ViewHolder holder, int position) {

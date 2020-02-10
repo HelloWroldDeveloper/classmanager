@@ -1,6 +1,5 @@
 package com.chen.adapter;
 
-import android.app.Activity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,10 +14,8 @@ import com.chen.data.LeaveApplication;
 //请假申请内容 适配器
 public class LeaveApplyContentAdapter extends RecyclerView.Adapter<LeaveApplyContentAdapter.ViewHolder>{
     private LeaveApplication application;//当前的请假申请
-    private Activity activity;
 
-    public LeaveApplyContentAdapter(Activity activity,LeaveApplication application){
-        this.activity=activity;
+    public LeaveApplyContentAdapter(LeaveApplication application){
         this.application=application;
     }
     static class ViewHolder extends RecyclerView.ViewHolder{
@@ -41,8 +38,7 @@ public class LeaveApplyContentAdapter extends RecyclerView.Adapter<LeaveApplyCon
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        ViewHolder holder=new ViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.leave_apply_content,parent,false));
-        return holder;
+        return new ViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.leave_apply_content,parent,false));
     }
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
@@ -55,5 +51,8 @@ public class LeaveApplyContentAdapter extends RecyclerView.Adapter<LeaveApplyCon
     @Override
     public int getItemCount() {
         return 1;
+    }
+    public void setApplication(LeaveApplication application) {
+        this.application = application;
     }
 }

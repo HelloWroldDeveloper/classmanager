@@ -16,7 +16,7 @@ public class ActionbarLayout extends LinearLayout {
     {
         super(context,attrs);
         LayoutInflater.from(context).inflate(R.layout.actionbar,this);
-        ImageButton btn=(ImageButton)findViewById(R.id.action_bar_btn);
+        ImageButton btn=findViewById(R.id.action_bar_btn);
         btn.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {

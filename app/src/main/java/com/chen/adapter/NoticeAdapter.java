@@ -25,8 +25,8 @@ public class NoticeAdapter extends RecyclerView.Adapter<NoticeAdapter.ViewHolder
         TextView notice_msg;
         public ViewHolder(View view){
             super(view);
-            notice_titleBtn=(Button)view.findViewById(R.id.notice_titleBtn);
-            notice_msg=(TextView)view.findViewById(R.id.notice_extraMsg);
+            notice_titleBtn=view.findViewById(R.id.notice_titleBtn);
+            notice_msg=view.findViewById(R.id.notice_extraMsg);
         }
     }
     public NoticeAdapter(List<Notice> notices,Activity activity){
@@ -37,8 +37,7 @@ public class NoticeAdapter extends RecyclerView.Adapter<NoticeAdapter.ViewHolder
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view= LayoutInflater.from(parent.getContext()).inflate(R.layout.notice_item,parent,false);
-        ViewHolder holder=new ViewHolder(view);
-        return holder;
+        return new ViewHolder(view);
     }
     @Override
     public void onBindViewHolder(@NonNull final ViewHolder holder,final int position) {

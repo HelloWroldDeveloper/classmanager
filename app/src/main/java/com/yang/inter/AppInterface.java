@@ -3,7 +3,6 @@ package com.yang.inter;
 import com.chen.data.MyDate;
 import com.chen.data.User;
 import com.chen.handle.DataInput;
-import com.chen.handle.IDGenerator;
 
 import java.text.ParseException;
 import java.util.List;
@@ -16,10 +15,6 @@ public class AppInterface {
         //该方法在主活动启动时会被调用(可以在此书写"初始化"逻辑)
     }
 
-    public static int getID(String name_space){
-        //根据传入的命名空间获取唯一的id
-        return IDGenerator.generationID(name_space);
-    }
     public static String getClassNumber(){
         //获取班号
         return DataInput.getClassNumber();
@@ -34,7 +29,7 @@ public class AppInterface {
     }
     public static List<User> getClassUsers(){
         //获取班级所有的用户
-        return User.getLatestUsers();
+        return User.getClass_users();
     }
 
     public static MyDate parseMyDate(String date){

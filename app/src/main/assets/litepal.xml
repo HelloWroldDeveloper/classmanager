@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<litepal>
+    <dbname value="Cache"/>
+    <version value="1"/>
+    <list>
+        <mapping class="com.chen.data.VoteID"/>
+        <mapping class="com.chen.data.VotedID"/>
+        <mapping class="com.chen.data.Notice"/>
+        <mapping class="com.chen.data.LeaveApplication"/>
+        <mapping class="com.chen.data.Grade"/>
+    </list>
+</litepal>

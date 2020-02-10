@@ -13,22 +13,24 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.ActionBar;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
 import com.baidu.location.BDAbstractLocationListener;
 import com.baidu.location.BDLocation;
-import com.baidu.location.LocationClient;
 import com.baidu.mapapi.SDKInitializer;
 import com.baidu.mapapi.model.LatLng;
 import com.baidu.mapapi.utils.DistanceUtil;
 import com.chen.data.ClassSign;
+import com.chen.handle.DataInput;
+import com.chen.handle.DataOutput;
+import com.chen.handle.Util;
 import com.chen.service.Locator;
 
 import java.util.ArrayList;
 import java.util.List;
 
+//签到 activity
 public class ClassSignActivity extends BaseActivity{
     private TextView back;//返回
     private TextView signed;//已签到
@@ -41,30 +43,48 @@ public class ClassSignActivity extends BaseActivity{
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        sign=ClassSign.searchClassSign();//从服务器检索对应于当前用户的签到
-        ActionBar bar=getSupportActionBar();
-        if(bar!=null){
-            bar.hide();//隐藏系统默认的标题栏
+        //从服务器检索对应于当前用户的签到
+        if(ClassSign.isAllow_activity_update()){
+            ClassSign.searchClassSign(this);
+            ClassSign.setAllow_activity_update(false);
         }
+        sign=ClassSign.getNow_sign();
+        Util.hideDefaultActionbar(this);//隐藏系统默认的标题栏
         if(sign==null){
             setContentView(R.layout.no_class_sign);
-            TextView title=(TextView)findViewById(R.id.action_bar_text);
+            TextView title=findViewById(R.id.action_bar_text);
             title.setText("签到");
         }else{
+            sign.setStatus(DataInput.getSignStatus(this));
             setContentView(R.layout.class_sign);
-            back=(TextView)findViewById(R.id.class_sign_back);
-            signed=(TextView)findViewById(R.id.class_sign_already_sign);
-            unsigned=(TextView)findViewById(R.id.class_sign_not_sign);
-            students=(TextView)findViewById(R.id.class_sign_person_list);
-            sign_btn=(Button)findViewById(R.id.class_sign_btn);
-            TextView place=(TextView)findViewById(R.id.class_sign_place);
-            TextView person=(TextView)findViewById(R.id.class_sign_person);
+            back=findViewById(R.id.class_sign_back);
+            signed=findViewById(R.id.class_sign_already_sign);
+            unsigned=findViewById(R.id.class_sign_not_sign);
+            students=findViewById(R.id.class_sign_person_list);
+            sign_btn=findViewById(R.id.class_sign_btn);
+            TextView place=findViewById(R.id.class_sign_place);
+            TextView person=findViewById(R.id.class_sign_person);
             place.setText(sign.getPlace());
             person.setText(sign.getInitiator());
             updateList(true);//更新已签到人员列表
+            if(sign.getStatus()==ClassSign.FAILED){
+                sign_btn.setEnabled(false);
+                sign_btn.setBackgroundDrawable(getResources().getDrawable(R.drawable.btn_grey));
+                sign_btn.setText("签到失败");
+            }else if(sign.getStatus()==ClassSign.SIGNED){
+                sign_btn.setEnabled(false);
+                sign_btn.setBackgroundDrawable(getResources().getDrawable(R.drawable.btn_grey));
+                sign_btn.setText("签到成功");
+            }
             addEvent();
         }
     }
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        DataOutput.saveSignStatus(this);
+    }
+
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         //与申请权限的结果有关的回调方法
@@ -121,9 +141,10 @@ public class ClassSignActivity extends BaseActivity{
         if(studentSigns==null){
             students.setText("当前为空白...");
         }else{
-            StringBuilder builder=new StringBuilder("");
+            StringBuilder builder=new StringBuilder();
             for(ClassSign.StudentSign studentSign:studentSigns){
-                builder.append(studentSign.getName()+" "+studentSign.getSign_time().toString()+"\n");
+                builder.append(studentSign.getName());
+                builder.append("\n");
             }
             students.setText(builder.toString());
         }
@@ -141,7 +162,7 @@ public class ClassSignActivity extends BaseActivity{
         //判断一下必要的三个权限是否都被允许了
         if(!permissions.isEmpty()){
             //申请权限
-            String[] p=permissions.toArray(new String[permissions.size()]);
+            String[] p=permissions.toArray(new String[0]);
             ActivityCompat.requestPermissions(this,p,1);
         }else {
             //执行定位
@@ -158,17 +179,17 @@ public class ClassSignActivity extends BaseActivity{
                 SDKInitializer.initialize(getApplicationContext());
                 double distance= DistanceUtil.getDistance(latLng,latLng2);
                 if(distance<=sign.getDistance()){
-                    sign.sign_succeed();
-                    Toast.makeText(ClassSignActivity.this,"签到成功 距离"+distance,Toast.LENGTH_SHORT).show();
+                    sign.sign((int)distance,true,sign_btn,ClassSignActivity.this);
+
                 }else {
-                    sign.sign_fail();
-                    Toast.makeText(ClassSignActivity.this,"签到失败 距离"+distance,Toast.LENGTH_SHORT).show();
+                    sign.sign((int)distance,false,sign_btn,ClassSignActivity.this);
                 }
             }
         });
     }
 
     public static void actionStart(Context context){
+        ClassSign.setAllow_activity_update(true);
         Intent intent=new Intent("com.chen.MainActivity.ACTION_CLASS_SIGN");
         context.startActivity(intent);
     }

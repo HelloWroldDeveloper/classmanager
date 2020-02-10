@@ -28,11 +28,11 @@ public class SubmitGradeAdapter extends RecyclerView.Adapter<SubmitGradeAdapter.
         TextView deadline;
         public ViewHolder(View view){
             super(view);
-            item=(LinearLayout)view.findViewById(R.id.submit_grade_item);
-            test_name=(TextView)view.findViewById(R.id.submit_grade_test_name);
-            extra_msg=(TextView)view.findViewById(R.id.submit_grade_extra_msg);
-            deadline=(TextView)view.findViewById(R.id.submit_grade_deadline);
-            layout=(LinearLayout)view.findViewById(R.id.submit_grade_layout);
+            item=view.findViewById(R.id.submit_grade_item);
+            test_name=view.findViewById(R.id.submit_grade_test_name);
+            extra_msg=view.findViewById(R.id.submit_grade_extra_msg);
+            deadline=view.findViewById(R.id.submit_grade_deadline);
+            layout=view.findViewById(R.id.submit_grade_layout);
         }
     }
     public SubmitGradeAdapter(List<Grade> grades, Activity activity){
@@ -43,8 +43,7 @@ public class SubmitGradeAdapter extends RecyclerView.Adapter<SubmitGradeAdapter.
     @Override
     public SubmitGradeAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view= LayoutInflater.from(parent.getContext()).inflate(R.layout.submit_grade_item,parent,false);
-        SubmitGradeAdapter.ViewHolder holder=new SubmitGradeAdapter.ViewHolder(view);
-        return holder;
+        return new SubmitGradeAdapter.ViewHolder(view);
     }
     @Override
     public void onBindViewHolder(@NonNull final SubmitGradeAdapter.ViewHolder holder, final int position) {
@@ -64,7 +63,6 @@ public class SubmitGradeAdapter extends RecyclerView.Adapter<SubmitGradeAdapter.
             holder.deadline.setBackgroundColor(Color.parseColor("#D4F2E7"));
         }else{
             holder.extra_msg.setText(grade.getExtraMsg()+" 已过期");
-            holder.item.setEnabled(false);
             holder.layout.setBackgroundColor(Color.parseColor("#808080"));
             holder.extra_msg.setBackgroundColor(Color.parseColor("#808080"));
             holder.deadline.setBackgroundColor(Color.parseColor("#808080"));

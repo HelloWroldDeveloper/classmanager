@@ -10,10 +10,10 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.appcompat.app.ActionBar;
-
 import com.chen.data.Grade;
+import com.chen.handle.Util;
 
+//上传成绩项目的详情 activity
 public class SubmitGradeContentActivity extends BaseActivity {
     private static final String TAG="SubmitGradeContent";//用于发日志的tag
 
@@ -21,24 +21,20 @@ public class SubmitGradeContentActivity extends BaseActivity {
     private Button submit;//"上传成绩"按钮
     private TextView tip;//"请输入您的成绩"或"在此修改您的成绩"标签
     private Grade score;//当前活动对应的成绩上传项目
-    private int grade_id;//成绩上传项目对应的id
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.submit_grade_content);
-        ActionBar bar=getSupportActionBar();
-        if(bar!=null){
-            bar.hide();//隐藏系统默认的标题栏
-        }
+        Util.hideDefaultActionbar(this);//隐藏系统默认的标题栏
         TextView title=findViewById(R.id.action_bar_text);
         title.setText("成绩上传");
-        TextView test_name=(TextView)findViewById(R.id.submit_grade_content_test_name);
-        TextView monitor=(TextView)findViewById(R.id.submit_grade_content_monitor);
-        grade=(EditText)findViewById(R.id.submit_grade_content_score_text);
-        submit=(Button)findViewById(R.id.submit_grade_ok);
-        tip=(TextView)findViewById(R.id.submit_grade_tip_text);
-        grade_id=Integer.parseInt(getIntent().getStringExtra("id"));
+        TextView test_name=findViewById(R.id.submit_grade_content_test_name);
+        TextView monitor=findViewById(R.id.submit_grade_content_monitor);
+        grade=findViewById(R.id.submit_grade_content_score_text);
+        submit=findViewById(R.id.submit_grade_ok);
+        tip=findViewById(R.id.submit_grade_tip_text);
+        int grade_id=Integer.parseInt(getIntent().getStringExtra("id"));
         score=Grade.findGradeByID(grade_id);//通过id找到对应的成绩上传项目
         if(score!=null){
             test_name.setText(score.getTest_name());//获得考试名称
@@ -51,10 +47,16 @@ public class SubmitGradeContentActivity extends BaseActivity {
         }
     }
     private void init(){
-        if(score.getStatus()==Grade.SUBMITTED){
+        if(score.getNowScore()!=-1){
             //如果用户之前提交过成绩了
-            tip.setText("在此修改您的成绩：");
-            this.grade.setText(""+score.getNowScore());//取出之前填写的成绩
+            int s=score.getNowScore();//取出之前填写的成绩
+            if(score.getStatus()!=Grade.OVER_DUE){
+                tip.setText("在此修改您的成绩：");
+            }else{
+                tip.setText("您的成绩：");
+                grade.setEnabled(false);
+            }
+            this.grade.setText(""+s);
         }
     }
     private void addEvent(){
@@ -83,22 +85,8 @@ public class SubmitGradeContentActivity extends BaseActivity {
                         Toast.makeText(SubmitGradeContentActivity.this,"您输入的成绩不合法",Toast.LENGTH_SHORT).show();
                     }else{
                         Grade g=SubmitGradeContentActivity.this.score;
-                        if(g.getStatus()==Grade.NOT_SUBMITTED){
-                            g.setStatus(Grade.SUBMITTED);//把当前成绩上传项目的状态设置为"已提交"
-                            g.setNowScore(value);
-                            //用户要上传成绩(在此书写逻辑)
-
-                            //用户要上传成绩(在此书写逻辑)
-                            Toast.makeText(SubmitGradeContentActivity.this,"上传成功",Toast.LENGTH_SHORT).show();
-                            finish();
-                        }else{
-                            g.setNowScore(value);
-                            //用户要修改成绩(在此书写逻辑)
-
-                            //用户要修改成绩(在此书写逻辑)
-                            Toast.makeText(SubmitGradeContentActivity.this,"修改成功",Toast.LENGTH_SHORT).show();
-                            finish();
-                        }
+                        g.setNowScore(value);
+                        Grade.submit_grade(g,SubmitGradeContentActivity.this);
                     }
                 }
             }
@@ -107,7 +95,7 @@ public class SubmitGradeContentActivity extends BaseActivity {
     public static void actionStart(Context context, Grade grade){
         //调用该方法以启动当前活动
         Intent intent=new Intent("com.chen.MainActivity.ACTION_SUBMIT_GRADE");
-        intent.putExtra("id",grade.getId()+"");
+        intent.putExtra("id",grade.getGrade_id()+"");
         context.startActivity(intent);
     }
 }

@@ -36,19 +36,18 @@ public class LeaveApplyadapter extends RecyclerView.Adapter<LeaveApplyadapter.Vi
 
         public ViewHolder(View view){
             super(view);
-            title=(TextView) view.findViewById(R.id.leave_item_title);
-            date_start=(TextView)view.findViewById(R.id.leave_item_date_start);
-            date_end=(TextView)view.findViewById(R.id.leave_item_date_end);
-            status=(TextView)view.findViewById(R.id.leave_item_status);
-            item=(LinearLayout)view.findViewById(R.id.leave_item);
+            title= view.findViewById(R.id.leave_item_title);
+            date_start=view.findViewById(R.id.leave_item_date_start);
+            date_end=view.findViewById(R.id.leave_item_date_end);
+            status=view.findViewById(R.id.leave_item_status);
+            item=view.findViewById(R.id.leave_item);
         }
     }
 
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        ViewHolder holder=new ViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.leave_apply_item,parent,false));
-        return holder;
+        return new ViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.leave_apply_item,parent,false));
     }
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {

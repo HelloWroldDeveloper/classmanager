@@ -7,24 +7,22 @@ import android.widget.CheckBox;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.ActionBar;
 
 import com.chen.data.User;
+import com.chen.handle.Util;
 
+//用户信息 activity
 public class UserMsgActivity extends BaseActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.personal_msg);
         User now_user=User.getNowUser();//获取当前用户
-        TextView user_number=(TextView) findViewById(R.id.person_msg_user_number);
-        TextView user_name=(TextView) findViewById(R.id.person_msg_user_name);
-        CheckBox isAdmin=(CheckBox) findViewById(R.id.person_msg_user_type);
-        TextView title=(TextView)findViewById(R.id.action_bar_text);
-        ActionBar bar=getSupportActionBar();
-        if(bar!=null){
-            bar.hide();//隐藏系统默认的标题栏
-        }
+        TextView user_number=findViewById(R.id.person_msg_user_number);
+        TextView user_name=findViewById(R.id.person_msg_user_name);
+        CheckBox isAdmin=findViewById(R.id.person_msg_user_type);
+        TextView title=findViewById(R.id.action_bar_text);
+        Util.hideDefaultActionbar(this);//隐藏系统默认的标题栏
         if(now_user.isAdmin()){
             //如果当前用户是管理员
             isAdmin.setChecked(true);

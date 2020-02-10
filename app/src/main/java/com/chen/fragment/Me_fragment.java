@@ -26,7 +26,6 @@ public class Me_fragment extends Fragment {
     private TextView submit_grade;
     private TextView ask_for_leave;
     private TextView class_sign;
-    private TextView settings;
     private TextView about;
     @Nullable
     @Override
@@ -36,7 +35,6 @@ public class Me_fragment extends Fragment {
         submit_grade=(TextView)view.findViewById(R.id.submit_grade);
         ask_for_leave=(TextView)view.findViewById(R.id.holiday);
         class_sign=(TextView)view.findViewById(R.id.class_sign);
-        settings=(TextView)view.findViewById(R.id.settings);
         about=(TextView) view.findViewById(R.id.about);
         TextView name=(TextView)view.findViewById(R.id.me_welcome);
         name.setText(User.getNowUser().getName()+"，欢迎您");
@@ -76,20 +74,12 @@ public class Me_fragment extends Fragment {
                 //在此书写"签到"标签的点击事件处理
             }
         });
-        settings.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                //在此书写"设置"标签的点击事件处理
-
-                //在此书写"设置"标签的点击事件处理
-            }
-        });
         about.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //在此书写"设置"标签的点击事件处理
+                //在此书写"关于"标签的点击事件处理
                 AboutActivity.actionStart(getActivity());
-                //在此书写"设置"标签的点击事件处理
+                //在此书写"关于"标签的点击事件处理
             }
         });
     }

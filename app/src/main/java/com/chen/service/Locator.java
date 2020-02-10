@@ -5,7 +5,6 @@ import android.content.Context;
 import com.baidu.location.BDAbstractLocationListener;
 import com.baidu.location.LocationClient;
 import com.baidu.location.LocationClientOption;
-import com.baidu.mapapi.model.LatLng;
 
 public class Locator {
 
