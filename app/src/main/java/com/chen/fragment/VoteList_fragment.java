@@ -14,12 +14,13 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.chen.activity.R;
 import com.chen.adapter.VoteAdapter;
 import com.chen.data.Vote;
+import com.chen.handle.ScreenUtil;
 import com.chen.handle.Util;
 
 import java.util.List;
 
 //有投票事件时的"投票列表"碎片
-public class VoteList_fragment extends Fragment {
+public class VoteList_fragment extends BaseFragment {
     private List<Vote> votes;
     private VoteAdapter adapter;//投票事件列表 适配器
     private boolean is_me;//是否当前用户创建的投票
@@ -33,6 +34,7 @@ public class VoteList_fragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        ScreenUtil.adapterScreen(getActivity(),480,false);
         View view=inflater.inflate(R.layout.vote_list_f1,container,false);
         //初始化recyclerView
         RecyclerView recyclerView=view.findViewById(R.id.vote_list_f1_recyclerview);

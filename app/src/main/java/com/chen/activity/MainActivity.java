@@ -124,11 +124,13 @@ public class MainActivity extends BaseActivity {
         //初始化主活动
         LitePal.getDatabase();//初始化数据库
         DataInput.updateNowUser(this);//更新当前用户的信息
-        Notice.initNotices();//初始化通知
-        Grade.initGrades();//初始化成绩上传
-        User.initUsers();//初始化班级用户
-        LeaveApplication.initApplications();//初始化请假申请
-        Vote.initVote();//初始化投票
+        if(!User.getNowUser().getNumber().equals("")){
+            Notice.initNotices();//初始化通知
+            Grade.initGrades();//初始化成绩上传
+            User.initUsers();//初始化班级用户
+            LeaveApplication.initApplications();//初始化请假申请
+            Vote.initVote();//初始化投票
+        }
         AppInterface.AppInit();
     }
 }

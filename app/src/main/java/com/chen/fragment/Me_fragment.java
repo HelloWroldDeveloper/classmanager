@@ -20,8 +20,10 @@ import com.chen.activity.SubmitGradeActivity;
 import com.chen.activity.UserMsgActivity;
 import com.chen.data.User;
 import com.chen.handle.DataInput;
+import com.chen.handle.ScreenUtil;
+
 //"我的"碎片
-public class Me_fragment extends Fragment {
+public class Me_fragment extends BaseFragment {
     private RelativeLayout relativeLayout;
     private TextView submit_grade;
     private TextView ask_for_leave;
@@ -30,6 +32,7 @@ public class Me_fragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        ScreenUtil.adapterScreen(getActivity(),480,false);
         View view=inflater.inflate(R.layout.me,container,false);
         relativeLayout=(RelativeLayout)view.findViewById(R.id.usermsg);
         submit_grade=(TextView)view.findViewById(R.id.submit_grade);

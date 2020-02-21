@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.Looper;
 import android.util.Log;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -230,7 +231,13 @@ public class DataOutput {
                     if(r.equals("ok")){
                         RegisterActivity.actionStart(number,em,password,MyApplication.getContext());
                     }else {
-                        Toast.makeText(MyApplication.getContext(),"注册失败",Toast.LENGTH_SHORT).show();
+                        try{
+                            Toast.makeText(MyApplication.getContext(),"注册失败",Toast.LENGTH_SHORT).show();
+                        }catch (Exception e1){
+                            Looper.prepare();
+                            Toast.makeText(MyApplication.getContext(),"注册失败",Toast.LENGTH_SHORT).show();
+                            Looper.loop();
+                        }
                         Log.e(TAG, "用户发起注册(尚未验证邮箱)失败" );
                     }
                 }catch (Exception e){
@@ -261,38 +268,43 @@ public class DataOutput {
                 try{
                     String result= URLDecoder.decode(response.body().string(),"utf-8");
                     JSONObject jsonObject=new JSONObject(result);
-                    String r=jsonObject.getString("status");
-                    switch (r){
-                        case "ok":
-                            User.setNow_user(new User(number,name,DataInput.getUserType()));
-                            DataOutput.saveNowUser(activity);
-                            Intent intent=new Intent(activity, MainActivity.class);
-                            activity.startActivity(intent);
-                            List<Activity> activities=ActivityCollector.getActivities();
-                            for(int i=0;i<activities.size()-1;i++){
-                                activities.get(i).finish();
+                    final String r=jsonObject.getString("status");
+                    activity.runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            switch (r){
+                                case "ok":
+                                    User.setNow_user(new User(number,name,DataInput.getUserType()));
+                                    DataOutput.saveNowUser(activity);
+                                    Intent intent=new Intent(activity, MainActivity.class);
+                                    activity.startActivity(intent);
+                                    List<Activity> activities=ActivityCollector.getActivities();
+                                    for(int i=0;i<activities.size()-1;i++){
+                                        activities.get(i).finish();
+                                    }
+                                    break;
+                                case "overtime":
+                                    Toast.makeText(activity,"激活码已过期",Toast.LENGTH_SHORT).show();
+                                    activity.finish();
+                                    break;
+                                case "error":
+                                    Toast.makeText(activity,"激活码错误",Toast.LENGTH_SHORT).show();
+                                    break;
+                                case "number_already":
+                                    Toast.makeText(activity,"学号已注册",Toast.LENGTH_SHORT).show();
+                                    activity.finish();
+                                    break;
+                                case "email_already":
+                                    Toast.makeText(activity,"邮箱已注册",Toast.LENGTH_SHORT).show();
+                                    activity.finish();
+                                    break;
+                                default:
+                                    Toast.makeText(activity,"激活失败(发生未知错误)",Toast.LENGTH_SHORT).show();
+                                    Log.e(TAG, "用户发起注册(等待验证邮箱)失败" );
+                                    break;
                             }
-                            break;
-                        case "overtime":
-                            Toast.makeText(activity,"激活码已过期",Toast.LENGTH_SHORT).show();
-                            activity.finish();
-                            break;
-                        case "error":
-                            Toast.makeText(activity,"激活码错误",Toast.LENGTH_SHORT).show();
-                            break;
-                        case "number_already":
-                            Toast.makeText(activity,"学号已注册",Toast.LENGTH_SHORT).show();
-                            activity.finish();
-                            break;
-                        case "email_already":
-                            Toast.makeText(activity,"邮箱已注册",Toast.LENGTH_SHORT).show();
-                            activity.finish();
-                            break;
-                        default:
-                            Toast.makeText(activity,"激活失败(发生未知错误)",Toast.LENGTH_SHORT).show();
-                            Log.e(TAG, "用户发起注册(等待验证邮箱)失败" );
-                            break;
-                    }
+                        }
+                    });
                 }catch (Exception e){
                     Util.displayError(null,e,"激活失败(发生未知错误)","用户发起注册(等待验证邮箱)失败",TAG);
                 }

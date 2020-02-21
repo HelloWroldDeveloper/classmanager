@@ -211,10 +211,15 @@ public class LeaveApplication extends DataSupport {
                 try {
                     int id=Integer.parseInt(new JSONObject(URLDecoder.decode(response.body().string(),"utf-8")).getString("id"));
                     applications.add(new LeaveApplication(title,content,start_date,end_date,id));
-                    Toast.makeText(activity,"成功创建申请",Toast.LENGTH_SHORT).show();
-                    fragment.setCreating(true);
-                    DataOutput.deleteApplication(activity);
-                    activity.finish();
+                    activity.runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            Toast.makeText(activity,"成功创建申请",Toast.LENGTH_SHORT).show();
+                            fragment.setCreating(true);
+                            DataOutput.deleteApplication(activity);
+                            activity.finish();
+                        }
+                    });
                 }catch (Exception e){
                     Util.displayError(activity,e,"创建请假申请失败",TAG,true);
                 }

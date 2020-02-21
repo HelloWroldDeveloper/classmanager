@@ -3,6 +3,7 @@ package com.chen.handle;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.widget.Toast;
 
 import com.chen.activity.BaseActivity;
 import com.chen.data.AppVersion;
@@ -169,7 +170,7 @@ public class DataInput {
                         AppVersion v=new AppVersion(version,update,update_date);
                         versions.add(v);
                     }
-                    List<AppVersion> new_versions=new ArrayList<>();
+                    final List<AppVersion> new_versions=new ArrayList<>();
                     boolean flag=false;
                     for(AppVersion version:versions){
                         if(flag||Double.parseDouble(version.getVersion())>Double.parseDouble(DataInput.getNowVersion())){
@@ -177,8 +178,22 @@ public class DataInput {
                             new_versions.add(version);
                         }
                     }
-                    //根据new_versions显示更新日志或进行更新(在此书写逻辑)
-
+                    //根据new_versions显示更新日志或进行更新
+                    if(!new_versions.isEmpty()){
+                        activity.runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                Toast.makeText(activity,"最新版本:"+new_versions.get(new_versions.size()-1).getVersion(),Toast.LENGTH_SHORT).show();
+                            }
+                        });
+                    }else{
+                        activity.runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                Toast.makeText(activity,"暂无更新的版本",Toast.LENGTH_SHORT).show();
+                            }
+                        });
+                    }
                 }catch (Exception e){
                     Util.displayError(activity,e,"无法获得客户端信息", TAG,true);
                 }

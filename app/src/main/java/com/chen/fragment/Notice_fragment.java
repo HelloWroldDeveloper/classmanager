@@ -15,16 +15,18 @@ import com.chen.activity.R;
 import com.chen.adapter.NoticeAdapter;
 import com.chen.data.Notice;
 import com.chen.handle.DataOutput;
+import com.chen.handle.ScreenUtil;
 import com.chen.handle.Util;
 
 import java.util.List;
 //"通知"碎片
-public class Notice_fragment extends Fragment {
+public class Notice_fragment extends BaseFragment {
     private boolean choose_read=false;
     private NoticeAdapter adapter;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        ScreenUtil.adapterScreen(getActivity(),480,false);
         View view=inflater.inflate(R.layout.notice,container,false);
         final TextView not_read=view.findViewById(R.id.not_read);
         final TextView read=view.findViewById(R.id.read);

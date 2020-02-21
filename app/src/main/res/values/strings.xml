@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">班级管理系统</string>
+    <string name="app_name">班级管理系统(成员版)</string>
     <string name="class_sign1"><u>返回</u></string>
     <string name="class_sign2"><u>已签到</u></string>
     <string name="class_sign3"><u>未签到</u></string>

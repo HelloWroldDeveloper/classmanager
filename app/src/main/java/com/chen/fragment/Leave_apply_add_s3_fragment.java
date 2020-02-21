@@ -21,9 +21,10 @@ import com.chen.data.LeaveApplication;
 import com.chen.data.MyDate;
 import com.chen.handle.DataInput;
 import com.chen.handle.DataOutput;
+import com.chen.handle.ScreenUtil;
 
 //创建请假申请步骤三 fragment
-public class Leave_apply_add_s3_fragment extends Fragment{
+public class Leave_apply_add_s3_fragment extends BaseFragment{
     private boolean creating=false;
 
     private TextView start_date_text;
@@ -56,6 +57,7 @@ public class Leave_apply_add_s3_fragment extends Fragment{
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        ScreenUtil.adapterScreen(getActivity(),480,false);
         View view=inflater.inflate(R.layout.leave_apply_add_s3,container,false);
         start_date_text=view.findViewById(R.id.leave_apply_add_s3_start_date_text);
         end_date_text=view.findViewById(R.id.leave_apply_add_s3_end_date_text);

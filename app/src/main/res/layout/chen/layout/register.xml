@@ -3,10 +3,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
-
     <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="301dp"
+        android:layout_height="124dp"
         android:layout_marginLeft="15dp"
         android:src="@drawable/welcome_register"
         android:visibility="visible" />
@@ -17,7 +16,7 @@
         android:layout_marginTop="10dp"
         android:gravity="center"
         android:text="学号："
-        android:textSize="30sp" />
+        android:textSize="30dp" />
     <EditText
         android:layout_width="match_parent"
         android:layout_height="60dp"
@@ -27,7 +26,7 @@
         android:inputType="number"
         android:paddingRight="60dp"
         android:maxLength="13"
-        android:textSize="30sp"
+        android:textSize="30dp"
         android:hint="请输入13位学号"/>
     <TextView
         android:layout_width="wrap_content"
@@ -36,7 +35,7 @@
         android:layout_marginTop="10dp"
         android:gravity="center"
         android:text="密码："
-        android:textSize="30sp" />
+        android:textSize="30dp" />
     <EditText
         android:inputType="textPassword"
         android:layout_width="match_parent"
@@ -45,7 +44,7 @@
         android:layout_marginLeft="15dp"
         android:layout_marginTop="5dp"
         android:paddingRight="60dp"
-        android:textSize="30sp"
+        android:textSize="30dp"
         android:hint="请输入密码(至少8位)"/>
     <TextView
         android:layout_width="wrap_content"
@@ -54,7 +53,7 @@
         android:layout_marginTop="10dp"
         android:gravity="center"
         android:text="确认密码："
-        android:textSize="30sp" />
+        android:textSize="30dp" />
     <EditText
         android:inputType="textPassword"
         android:layout_width="match_parent"
@@ -63,7 +62,7 @@
         android:layout_marginLeft="15dp"
         android:layout_marginTop="5dp"
         android:paddingRight="60dp"
-        android:textSize="30sp"
+        android:textSize="30dp"
         android:hint="再次输入密码"/>
     <TextView
         android:layout_width="wrap_content"
@@ -72,7 +71,7 @@
         android:layout_marginTop="10dp"
         android:gravity="center"
         android:text="邮箱："
-        android:textSize="30sp" />
+        android:textSize="30dp" />
     <EditText
         android:layout_width="match_parent"
         android:layout_height="60dp"
@@ -81,7 +80,7 @@
         android:layout_marginTop="5dp"
         android:inputType="textEmailAddress"
         android:paddingRight="60dp"
-        android:textSize="30sp"
+        android:textSize="30dp"
         android:hint="请输入您的邮箱地址"/>
     <Button
         android:id="@+id/register"
@@ -92,6 +91,6 @@
         android:background="#ff336699"
         android:textColor="@android:color/white"
         android:gravity="center"
-        android:textSize="30sp"
+        android:textSize="30dp"
         android:text="下一步" />
 </LinearLayout>

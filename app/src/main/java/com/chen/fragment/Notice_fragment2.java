@@ -14,12 +14,13 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.chen.activity.R;
 import com.chen.adapter.NoticeAdapter;
 import com.chen.data.Notice;
+import com.chen.handle.ScreenUtil;
 import com.chen.handle.Util;
 
 import java.util.List;
 
 //"通知"子碎片
-public class Notice_fragment2 extends Fragment {
+public class Notice_fragment2 extends BaseFragment {
     private List<Notice> noticeList;
     private NoticeAdapter adapter;
 
@@ -30,6 +31,7 @@ public class Notice_fragment2 extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        ScreenUtil.adapterScreen(getActivity(),480,false);
         View view;
         view=inflater.inflate(R.layout.notice_recyclerview,container,false);
         //用recyclerView显示通知项目

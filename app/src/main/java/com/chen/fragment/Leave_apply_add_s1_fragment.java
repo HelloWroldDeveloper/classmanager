@@ -14,9 +14,10 @@ import com.chen.activity.R;
 import com.chen.data.LeaveApplication;
 import com.chen.handle.DataInput;
 import com.chen.handle.DataOutput;
+import com.chen.handle.ScreenUtil;
 
 //创建请假申请步骤一 fragment
-public class Leave_apply_add_s1_fragment extends Fragment {
+public class Leave_apply_add_s1_fragment extends BaseFragment {
     private EditText title;//请假申请的标题
     private EditText content;//请假申请的内容
 
@@ -30,6 +31,7 @@ public class Leave_apply_add_s1_fragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        ScreenUtil.adapterScreen(getActivity(),480,false);
         View view=inflater.inflate(R.layout.leave_apply_add_s1,container,false);
         title=view.findViewById(R.id.leave_apply_add_s1_title);
         content=view.findViewById(R.id.leave_apply_add_s1_content);

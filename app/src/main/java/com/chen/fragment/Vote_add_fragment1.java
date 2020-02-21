@@ -13,12 +13,13 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.chen.activity.R;
 import com.chen.adapter.VoteAddAdapter;
+import com.chen.handle.ScreenUtil;
 import com.chen.handle.Util;
 
 import java.util.List;
 
 //有投票选项时的"添加投票"碎片
-public class Vote_add_fragment1 extends Fragment {
+public class Vote_add_fragment1 extends BaseFragment {
     private List<String> vote_contents;//投票选项 列表
     private VoteAddAdapter adapter;//投票选项列表 适配器
 
@@ -29,6 +30,7 @@ public class Vote_add_fragment1 extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        ScreenUtil.adapterScreen(getActivity(),480,false);
         View view=inflater.inflate(R.layout.vote_add_f1,container,false);
         //加载recyclerView
         RecyclerView recyclerView=view.findViewById(R.id.vote_add_f1_recyclerView);

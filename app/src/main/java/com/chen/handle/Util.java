@@ -2,6 +2,7 @@ package com.chen.handle;
 
 import android.app.Activity;
 import android.graphics.drawable.ColorDrawable;
+import android.os.Looper;
 import android.util.Log;
 import android.widget.NumberPicker;
 import android.widget.Toast;
@@ -106,7 +107,14 @@ public class Util {
                     }
                 });
             }else {
-                Toast.makeText(MyApplication.getContext(),msg,Toast.LENGTH_SHORT).show();
+                try{
+                    Toast.makeText(MyApplication.getContext(),msg,Toast.LENGTH_SHORT).show();
+                }catch (Exception e1){
+                    Looper.prepare();
+                    Toast.makeText(MyApplication.getContext(),msg,Toast.LENGTH_SHORT).show();
+                    Looper.loop();
+                }
+
             }
         }
         e.printStackTrace();
@@ -121,7 +129,13 @@ public class Util {
                 }
             });
         }else {
-            Toast.makeText(MyApplication.getContext(),toast_msg,Toast.LENGTH_SHORT).show();
+            try{
+                Toast.makeText(MyApplication.getContext(),toast_msg,Toast.LENGTH_SHORT).show();
+            }catch (Exception e1){
+                Looper.prepare();
+                Toast.makeText(MyApplication.getContext(),toast_msg,Toast.LENGTH_SHORT).show();
+                Looper.loop();
+            }
         }
         e.printStackTrace();
         Log.e(tag, log_msg );
